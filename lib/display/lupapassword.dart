@@ -12,7 +12,6 @@ class LupaPasswordPage extends StatefulWidget {
 class _LupaPasswordPage extends State<LupaPasswordPage> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
         body: Column(
       children: [
@@ -197,7 +196,6 @@ class Lupapasswordlanjutan extends StatefulWidget {
 class _Lupapasswordlanjutan extends State<Lupapasswordlanjutan> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
         body: Column(
       children: [

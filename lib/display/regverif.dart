@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:projectmobile/display/loginpage.dart';
-import 'package:projectmobile/display/startpage.dart';
-import 'package:projectmobile/display/regverif.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+class Regverif extends StatefulWidget {
+  const Regverif({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _RegisterPageState createState() => _RegisterPageState();
+  _Regverif createState() => _Regverif();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
-  bool _isPasswordVisible = false;
-  bool _isConfPasswordVisible = false;
+class _Regverif extends State<Regverif> {
+  bool _isChecked = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          // Header
           Container(
             height: 80,
             decoration: const BoxDecoration(
@@ -42,10 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       left: 16.0, top: 16.0, bottom: 16.0, right: 4),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const StartPage()));
+                      Navigator.pop(context);
                     },
                     child: const Icon(
                       Icons.arrow_back,
@@ -82,7 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
           const SizedBox(
             height: 50,
           ),
-          // Body
+
           Expanded(
             child: Center(
               child: Column(
@@ -108,66 +101,57 @@ class _RegisterPageState extends State<RegisterPage> {
                           // Email
                           TextFormField(
                             decoration: const InputDecoration(
-                              labelText: 'Email',
+                              labelText: 'Verifikasi Email',
                               border: UnderlineInputBorder(
                                 borderSide:
                                     BorderSide(width: 1, color: Colors.grey),
                               ),
                             ),
                           ),
-                          const SizedBox(height: 8),
-                          // Password
-                          TextFormField(
-                            obscureText: !_isPasswordVisible,
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                              border: const UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 1, color: Colors.grey),
-                              ),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  _isPasswordVisible
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
+                          const SizedBox(
+                            height: 150,
+                          ),
+
+                          SizedBox(
+                            height: 50,
+                            width: 300,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Checkbox(
+                                    value: _isChecked,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _isChecked = value!;
+                                      });
+                                    },
+                                  ),
                                 ),
-                                onPressed: () {
-                                  setState(() {
-                                    _isPasswordVisible = !_isPasswordVisible;
-                                  });
-                                },
-                              ),
+                                const Positioned(
+                                  left: 16,
+                                  bottom: 16,
+                                  child: SizedBox(
+                                    width: 200,
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        'Setuju, Anda sudah menyetujui segala isi Syarat dan Ketentuan Penggunaan dan Pemberitahuan Privasi',
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                        ),
+                                        softWrap: true,
+                                        maxLines: 3,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          const SizedBox(height: 8),
 
-                          TextFormField(
-                            obscureText: !_isPasswordVisible,
-                            decoration: InputDecoration(
-                              labelText: 'Confirm Password',
-                              border: const UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 1, color: Colors.grey),
-                              ),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  _isConfPasswordVisible
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    _isConfPasswordVisible =
-                                        !_isConfPasswordVisible;
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
                           const SizedBox(height: 8),
-
-                          const SizedBox(height: 70),
-                          // Tombol Login
                           SizedBox(
                             width: 200,
                             child: ElevatedButton(
@@ -177,20 +161,21 @@ class _RegisterPageState extends State<RegisterPage> {
                                   side: const BorderSide(color: Colors.grey)),
                               onPressed: () {
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const Regverif()));
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const LoginPage()),
+                                );
                               },
                               child: const Text(
                                 'Register',
-                                style: TextStyle(color: Colors.black),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
                               ),
                             ),
                           ),
 
                           const SizedBox(height: 8),
-
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -212,6 +197,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
           ),
+
           // Footer
           Container(
             height: 80,
