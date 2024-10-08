@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projectmobile/display/registerpage.dart';
+import 'package:projectmobile/display/lupapassword.dart';
+import 'package:projectmobile/display/startpage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -39,7 +41,10 @@ class _LoginPageState extends State<LoginPage> {
                       left: 16.0, top: 16.0, bottom: 16.0, right: 4),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const StartPage()));
                     },
                     child: const Icon(
                       Icons.arrow_back,
@@ -100,7 +105,10 @@ class _LoginPageState extends State<LoginPage> {
                           TextFormField(
                             decoration: const InputDecoration(
                               labelText: 'Email',
-                              border: OutlineInputBorder(),
+                              border: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(width: 1, color: Colors.grey),
+                              ),
                             ),
                           ),
                           const SizedBox(height: 16),
@@ -109,7 +117,10 @@ class _LoginPageState extends State<LoginPage> {
                             obscureText: !_isPasswordVisible,
                             decoration: InputDecoration(
                               labelText: 'Password',
-                              border: const OutlineInputBorder(),
+                              border: const UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(width: 1, color: Colors.grey),
+                              ),
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   _isPasswordVisible
@@ -206,22 +217,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class LupaPasswordPage extends StatelessWidget {
-  const LupaPasswordPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Lupa Password'),
-      ),
-      body: const Center(
-        child: Text('Halaman Lupa Password'),
       ),
     );
   }

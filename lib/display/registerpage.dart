@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:projectmobile/display/loginpage.dart';
+import 'package:projectmobile/display/startpage.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -11,6 +14,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   bool _isPasswordVisible = false;
+  bool _isConfPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       left: 16.0, top: 16.0, bottom: 16.0, right: 4),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const StartPage()));
                     },
                     child: const Icon(
                       Icons.arrow_back,
@@ -73,6 +80,9 @@ class _RegisterPageState extends State<RegisterPage> {
               ],
             ),
           ),
+          const SizedBox(
+            height: 50,
+          ),
           // Body
           Expanded(
             child: Center(
@@ -100,7 +110,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           TextFormField(
                             decoration: const InputDecoration(
                               labelText: 'Email',
-                              border: OutlineInputBorder(),
+                              border: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(width: 1, color: Colors.grey),
+                              ),
                             ),
                           ),
                           const SizedBox(height: 8),
@@ -109,7 +122,10 @@ class _RegisterPageState extends State<RegisterPage> {
                             obscureText: !_isPasswordVisible,
                             decoration: InputDecoration(
                               labelText: 'Password',
-                              border: const OutlineInputBorder(),
+                              border: const UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(width: 1, color: Colors.grey),
+                              ),
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   _isPasswordVisible
@@ -130,16 +146,20 @@ class _RegisterPageState extends State<RegisterPage> {
                             obscureText: !_isPasswordVisible,
                             decoration: InputDecoration(
                               labelText: 'Confirm Password',
-                              border: const OutlineInputBorder(),
+                              border: const UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(width: 1, color: Colors.grey),
+                              ),
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  _isPasswordVisible
+                                  _isConfPasswordVisible
                                       ? Icons.visibility
                                       : Icons.visibility_off,
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    _isPasswordVisible = !_isPasswordVisible;
+                                    _isConfPasswordVisible =
+                                        !_isConfPasswordVisible;
                                   });
                                 },
                               ),
@@ -147,7 +167,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           const SizedBox(height: 8),
 
-                          SizedBox(height: 16),
+                          const SizedBox(height: 70),
                           // Tombol Login
                           SizedBox(
                             width: 200,
