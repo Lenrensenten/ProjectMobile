@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectmobile/display/loginpage.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
@@ -6,101 +7,127 @@ class StartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF677D86), // warna header
-              Color(0xFFFFFFFF), // warna body
-              Color(0xFF677D86), // warna footer
-            ],
-            stops: [0.0, 0.5, 1.0],
-          ),
-        ),
-        child: Column(
-          children: [
-            // Header
-            Container(
-              height: 80,
-              color: const Color(0xFF677D86),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween, // Add this
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 16.0),
-                    child: SizedBox.shrink(), // Add this
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 16.0, top: 16.0),
-                    child: Container(
-                      // Add this
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                            color: const Color(0xFF677D86),
-                            width: 2), // Add this
+      body: Column(
+        children: [
+          // Header
+          Container(
+            height: 80,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xFF191E20), // warna header
+                  Color(0xFF677D86), // warna header
+                ],
+                stops: [0.0, 0.6],
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 16.0),
+                  child: SizedBox.shrink(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.black, width: 1),
+                    ),
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.question_mark,
+                        color: Colors.white,
+                        size: 24,
                       ),
-                      child: CircleAvatar(
-                        backgroundColor: Colors.white,
-                        child: Icon(
-                          Icons.question_mark,
-                          color: Colors.black,
-                          size: 24,
+                      onPressed: () {},
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Body
+          Expanded(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Logo aplikasi
+                  const Text('Shopedia', style: TextStyle(fontSize: 24)),
+                  Image.asset(
+                    'assets/logo.png', // ganti dengan logo aplikasi Anda
+                    width: 150,
+                    height: 150,
+                  ),
+                  // Tombol login dan register
+                  Column(
+                    // Change Row to Column
+                    children: [
+                      SizedBox(
+                        width: 150, // Add this
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              elevation: 5,
+                              side: const BorderSide(color: Colors.grey)),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginPage()));
+                          },
+                          child: const Text('Login',
+                              style: TextStyle(
+                                color: Colors.black,
+                              )),
                         ),
                       ),
-                    ),
+                      const SizedBox(height: 16),
+                      SizedBox(
+                          width: 150, // Add this
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                elevation: 5,
+                                side: const BorderSide(color: Colors.grey)),
+                            onPressed: () {},
+                            child: const Text('Register',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                )),
+                          )),
+                    ],
                   ),
                 ],
               ),
             ),
-            // Body
-            Expanded(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // Logo aplikasi
-                    Image.asset(
-                      'assets/logo.png', // ganti dengan logo aplikasi Anda
-                      width: 150,
-                      height: 150,
-                    ),
-                    // Tombol login dan register
-                    Column(
-                      // Change Row to Column
-                      children: [
-                        SizedBox(
-                          width: 150, // Add this
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white),
-                            onPressed: () {},
-                            child: Text('Login',
-                                style: TextStyle(color: Colors.black)),
-                          ),
-                        ),
-                        SizedBox(height: 16),
-                        SizedBox(
-                            width: 150, // Add this
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white),
-                              onPressed: () {},
-                              child: Text('Register',
-                                  style: TextStyle(color: Colors.black)),
-                            )),
-                      ],
-                    ),
-                  ],
-                ),
+          ),
+          // Footer
+          Container(
+            height: 80,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xFF677D86), // warna footer
+                  Color(0xFF191E20), // warna footer
+                ],
+                stops: [0.4, 1.0],
               ),
             ),
-            // Footer
-            Container(height: 80, color: const Color(0xFF677D86))
-          ],
-        ),
+            child: const Center(
+              child: Text(
+                'Versi 1.0',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
