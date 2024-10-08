@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projectmobile/display/loginpage.dart';
+import 'package:projectmobile/display/registerpage.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
@@ -94,7 +95,13 @@ class StartPage extends StatelessWidget {
                                 backgroundColor: Colors.white,
                                 elevation: 5,
                                 side: const BorderSide(color: Colors.grey)),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const RegisterPage()));
+                            },
                             child: const Text('Register',
                                 style: TextStyle(
                                   color: Colors.black,

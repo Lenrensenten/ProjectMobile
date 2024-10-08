@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:projectmobile/display/registerpage.dart';
+import 'package:projectmobile/display/loginpage.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   bool _isPasswordVisible = false;
 
   @override
@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                   Container(
                     padding: const EdgeInsets.only(bottom: 16.0),
                     child: const Text(
-                      'Login',
+                      'Register',
                       style: TextStyle(
                         fontSize: 24,
                       ),
@@ -103,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                               border: OutlineInputBorder(),
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: 8),
                           // Password
                           TextFormField(
                             obscureText: !_isPasswordVisible,
@@ -126,25 +126,28 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           const SizedBox(height: 8),
 
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const LupaPasswordPage()),
-                                );
-                              },
-                              child: const Text(
-                                'Lupa Password?',
-                                style: TextStyle(color: Colors.blue),
+                          TextFormField(
+                            obscureText: !_isPasswordVisible,
+                            decoration: InputDecoration(
+                              labelText: 'Confirm Password',
+                              border: const OutlineInputBorder(),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _isPasswordVisible
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _isPasswordVisible = !_isPasswordVisible;
+                                  });
+                                },
                               ),
                             ),
                           ),
+                          const SizedBox(height: 8),
 
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           // Tombol Login
                           SizedBox(
                             width: 200,
@@ -155,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                                   side: const BorderSide(color: Colors.grey)),
                               onPressed: () {},
                               child: const Text(
-                                'Login',
+                                'Register',
                                 style: TextStyle(color: Colors.black),
                               ),
                             ),
@@ -168,11 +171,11 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const RegisterPage()),
+                                    builder: (context) => const LoginPage()),
                               );
                             },
                             child: const Text(
-                              'Belum punya akun? Daftar',
+                              'Sudah punya akun?',
                               style: TextStyle(color: Colors.blue),
                             ),
                           ),
@@ -206,22 +209,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class LupaPasswordPage extends StatelessWidget {
-  const LupaPasswordPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Lupa Password'),
-      ),
-      body: const Center(
-        child: Text('Halaman Lupa Password'),
       ),
     );
   }
