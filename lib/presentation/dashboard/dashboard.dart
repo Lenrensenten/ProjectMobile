@@ -292,7 +292,7 @@ class _Dashboard extends State<Dashboard> {
                           Image.asset('assets/promo_baju2.png', height: 180),
                           const SizedBox(height: 8),
                           const Text(
-                            'Baju yang awet sampai ke Masa tua',
+                            'Baju yang awet \nsampai ke Masa tua',
                             textAlign: TextAlign.center,
                           ),
                         ],
