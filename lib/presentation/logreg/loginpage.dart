@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projectmobile/presentation/logreg/registerpage.dart';
 import 'package:projectmobile/presentation/logreg/lupapassword.dart';
 import 'package:projectmobile/presentation/logreg/startpage.dart';
+import 'package:projectmobile/presentation/dashboard/dashboard.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -164,7 +165,13 @@ class _LoginPageState extends State<LoginPage> {
                                   backgroundColor: Colors.white,
                                   elevation: 5,
                                   side: const BorderSide(color: Colors.grey)),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const Dashboard()));
+                              },
                               child: const Text(
                                 'Login',
                                 style: TextStyle(color: Colors.black),
