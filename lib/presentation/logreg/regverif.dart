@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projectmobile/display/loginpage.dart';
+import 'package:projectmobile/presentation/logreg/loginpage.dart';
 
 class Regverif extends StatefulWidget {
   const Regverif({super.key});

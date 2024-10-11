@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projectmobile/display/loginpage.dart';
-import 'package:projectmobile/display/registerpage.dart';
+import 'package:projectmobile/presentation/logreg/loginpage.dart';
+import 'package:projectmobile/presentation/logreg/registerpage.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});

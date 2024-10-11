@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:projectmobile/display/registerpage.dart';
-import 'package:projectmobile/display/lupapassword.dart';
-import 'package:projectmobile/display/startpage.dart';
+import 'package:projectmobile/presentation/logreg/registerpage.dart';
+import 'package:projectmobile/presentation/logreg/lupapassword.dart';
+import 'package:projectmobile/presentation/logreg/startpage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:projectmobile/display/loginpage.dart';
-import 'package:projectmobile/display/startpage.dart';
-import 'package:projectmobile/display/regverif.dart';
+import 'package:projectmobile/presentation/logreg/loginpage.dart';
+import 'package:projectmobile/presentation/logreg/startpage.dart';
+import 'package:projectmobile/presentation/logreg/regverif.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
