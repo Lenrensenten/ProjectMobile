@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectmobile/widget/profilemenu.dart';
 
 class Message extends StatefulWidget {
   const Message({super.key});
@@ -66,7 +67,9 @@ class _Messages extends State<Message> {
                             Icons.person,
                             color: Colors.white,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            ProfileMenu.showProfileMenu(context);
+                          },
                         ),
                       ),
                     ),
