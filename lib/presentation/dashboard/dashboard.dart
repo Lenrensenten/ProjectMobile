@@ -3,16 +3,89 @@ import '../message/message.dart';
 import '../notification/notifikasi.dart';
 import '../transaksi/traksaksi.dart';
 import '../cart/keranjang.dart';
+import '../logreg/startpage.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _Dashboard createState() => _Dashboard();
 }
 
 class _Dashboard extends State<Dashboard> {
+  // Fungsi untuk menampilkan pop-up menu saat tombol profil ditekan
+  void _showProfileMenu() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent, // Transparan agar lebih menarik
+      builder: (context) {
+        return Container(
+          decoration: const BoxDecoration(
+            color: Color(0xFF677D86),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.settings, color: Colors.white),
+                title: const Text('Settings',
+                    style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Aksi untuk Settings
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.help_center, color: Colors.white),
+                title: const Text('Pusat Bantuan',
+                    style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Aksi untuk Pusat Bantuan
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.reviews, color: Colors.white),
+                title:
+                    const Text('Ulasan', style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Aksi untuk Ulasan
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.favorite, color: Colors.white),
+                title: const Text('Wishlist',
+                    style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Aksi untuk Wishlist
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.logout, color: Colors.white),
+                title: const Text('Log Out',
+                    style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  // Aksi untuk Log Out
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const StartPage()));
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,16 +159,14 @@ class _Dashboard extends State<Dashboard> {
                   ),
                   // Akun Profil
                   IconButton(
-                    onPressed: () {},
+                    onPressed: _showProfileMenu, // Tampilkan menu saat ditekan
                     icon: const Icon(Icons.person, color: Colors.white),
                   ),
                 ],
               ),
             ),
           ),
-          const SizedBox(
-            height: 16,
-          ),
+          const SizedBox(height: 16),
           // Wallet Balance (Poin Section)
           Container(
             padding:
@@ -111,11 +182,10 @@ class _Dashboard extends State<Dashboard> {
                 const Row(
                   children: [
                     // Ikon Dompet
-                    Icon(Icons.wallet_travel,
-                        color: Colors.white, size: 24), // Ikon dompet
-                    SizedBox(width: 8), // Jarak antara ikon dan teks
+                    Icon(Icons.wallet_travel, color: Colors.white, size: 24),
+                    SizedBox(width: 8),
                     Text(
-                      '0 Poin', // Menampilkan saldo poin sesuai gambar
+                      '0 Poin',
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
@@ -124,27 +194,19 @@ class _Dashboard extends State<Dashboard> {
                 Row(
                   children: [
                     ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Bayar'),
-                    ),
+                        onPressed: () {}, child: const Text('Bayar')),
                     const SizedBox(width: 4),
                     ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Top Up'),
-                    ),
+                        onPressed: () {}, child: const Text('Top Up')),
                     const SizedBox(width: 4),
                     ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Lainnya'),
-                    ),
+                        onPressed: () {}, child: const Text('Lainnya')),
                   ],
                 ),
               ],
             ),
           ),
-          const SizedBox(
-            height: 16,
-          ),
+          const SizedBox(height: 16),
           // Horizontal Categories
           SizedBox(
             height: 40,
@@ -156,7 +218,7 @@ class _Dashboard extends State<Dashboard> {
                   margin: const EdgeInsets.symmetric(horizontal: 8.0),
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   decoration: BoxDecoration(
-                    color: Colors.redAccent, // Warna sesuai dengan gambar
+                    color: Colors.redAccent,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Center(
@@ -168,7 +230,7 @@ class _Dashboard extends State<Dashboard> {
                   margin: const EdgeInsets.symmetric(horizontal: 8.0),
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   decoration: BoxDecoration(
-                    color: Colors.orangeAccent, // Warna sesuai dengan gambar
+                    color: Colors.orangeAccent,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Center(
@@ -176,57 +238,68 @@ class _Dashboard extends State<Dashboard> {
                         style: TextStyle(color: Colors.white)),
                   ),
                 ),
+                // Diskon button
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 108, 255, 133),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const Center(
+                    child:
+                        Text('Diskon', style: TextStyle(color: Colors.white)),
+                  ),
+                ),
+                // Murah Mampus button
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 247, 97, 247),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const Center(
+                    child: Text('Murah Mampus',
+                        style: TextStyle(color: Colors.white)),
+                  ),
+                ),
               ],
             ),
           ),
+          const SizedBox(height: 16.0),
           // Featured Products
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding:
+                  const EdgeInsets.only(bottom: 16.0, left: 16.0, right: 16.0),
               child: ListView(
                 children: [
                   // Produk Promo 1
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Column(
                         children: [
-                          Image.asset('assets/promo_baju1.png',
-                              height: 180), // Gambar produk
+                          Image.asset('assets/promo_baju1.png', height: 180),
                           const SizedBox(height: 8),
                           const Text('Promo Baju Kekinian!!'),
                         ],
                       ),
                       Column(
                         children: [
-                          Image.asset('assets/promo_baju2.png',
-                              height: 180), // Gambar produk
+                          Image.asset('assets/promo_baju2.png', height: 180),
                           const SizedBox(height: 8),
                           const Text(
-                            'Baju yang awet sampai \nke Masa tua', // Membagi teks menjadi dua baris
-                            textAlign: TextAlign
-                                .center, // Menjaga teks agar tetap rapi di tengah
+                            'Baju yang awet sampai ke Masa tua',
+                            textAlign: TextAlign.center,
                           ),
                         ],
                       ),
                     ],
                   ),
                   const SizedBox(height: 16),
-                  // Disko button moved to body
-                  Container(
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 8.0), // Jarak atas dan bawah
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(
-                          255, 0, 255, 0), // Warna sesuai dengan gambar
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Center(
-                      child:
-                          Text('Disko', style: TextStyle(color: Colors.white)),
-                    ),
-                  ),
                   // Tambahan produk jika ada
                 ],
               ),
@@ -249,52 +322,45 @@ class _Dashboard extends State<Dashboard> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                // Baranda
                 Column(
                   children: [
                     IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.home, color: Colors.white),
-                    ),
-                    const Text('Baranda',
+                        onPressed: () {},
+                        icon: const Icon(Icons.home, color: Colors.white)),
+                    const Text('Beranda',
                         style: TextStyle(color: Colors.white)),
                   ],
                 ),
-                // Notifikasi
                 Column(
                   children: [
                     IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const NotificationPage()));
-                      },
-                      icon:
-                          const Icon(Icons.notifications, color: Colors.white),
-                    ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const NotificationPage()));
+                        },
+                        icon: const Icon(Icons.notifications,
+                            color: Colors.white)),
                     const Text('Notifikasi',
                         style: TextStyle(color: Colors.white)),
                   ],
                 ),
-                // Transaksi
                 Column(
                   children: [
                     IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Transaksi()));
-                      },
-                      icon: const Icon(Icons.list, color: Colors.white),
-                    ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Transaksi()));
+                        },
+                        icon: const Icon(Icons.history, color: Colors.white)),
                     const Text('Transaksi',
                         style: TextStyle(color: Colors.white)),
                   ],
                 ),
-                // Kategori
                 Column(
                   children: [
                     IconButton(
