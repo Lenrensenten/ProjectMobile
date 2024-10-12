@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projectmobile/presentation/message/message.dart';
+import 'checkoutpage.dart';
 
 class Keranjang extends StatefulWidget {
   const Keranjang({super.key});
@@ -181,7 +182,9 @@ class _Keranjang extends State<Keranjang> {
                   const Text('Total Rp0',
                       style: TextStyle(color: Colors.white)),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const CheckoutPage()));
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue, // Warna tombol
                       shape: RoundedRectangleBorder(

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:projectmobile/presentation/cart/topuppage.dart';
 import '../message/message.dart';
 import '../notification/notifikasi.dart';
 import '../transaksi/traksaksi.dart';
 import '../cart/keranjang.dart';
 import '../../widget/profilemenu.dart';
+import '../../widget/showsearchhistory.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -13,7 +15,13 @@ class Dashboard extends StatefulWidget {
 }
 
 class _Dashboard extends State<Dashboard> {
-  // Fungsi untuk menampilkan pop-up menu saat tombol profil ditekan
+  List<String> searchHistory = [
+    "Baju kekinian",
+    "Celana jeans",
+    "Jaket kulit",
+    "Sepatu sneaker",
+    "Topi stylish"
+  ]; // Daftar search history
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +105,7 @@ class _Dashboard extends State<Dashboard> {
               ),
             ),
           ),
+
           const SizedBox(height: 16),
           // Wallet Balance (Poin Section)
           Container(
@@ -128,7 +137,7 @@ class _Dashboard extends State<Dashboard> {
                         onPressed: () {}, child: const Text('Bayar')),
                     const SizedBox(width: 4),
                     ElevatedButton(
-                        onPressed: () {}, child: const Text('Top Up')),
+                        onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> TopUpPage()));}, child: const Text('Top Up')),
                     const SizedBox(width: 4),
                     ElevatedButton(
                         onPressed: () {}, child: const Text('Lainnya')),
