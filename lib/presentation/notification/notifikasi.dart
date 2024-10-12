@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projectmobile/presentation/cart/keranjang.dart';
 import 'package:projectmobile/presentation/transaksi/traksaksi.dart';
+import 'package:projectmobile/widget/kategori.dart';
 import 'package:projectmobile/widget/profilemenu.dart';
 import '../dashboard/dashboard.dart';
 import '../message/message.dart';
@@ -155,7 +156,9 @@ class _NotificationPage extends State<NotificationPage> {
                 Column(
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        CategoryMenu.showCategoryMenu(context);
+                      },
                       icon: const Icon(Icons.category, color: Colors.white),
                     ),
                     const Text('Kategori',
