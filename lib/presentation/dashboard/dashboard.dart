@@ -4,6 +4,7 @@ import '../notification/notifikasi.dart';
 import '../transaksi/traksaksi.dart';
 import '../cart/keranjang.dart';
 import '../../widget/profilemenu.dart';
+import '../Top up/topup.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -128,7 +129,15 @@ class _Dashboard extends State<Dashboard> {
                         onPressed: () {}, child: const Text('Bayar')),
                     const SizedBox(width: 4),
                     ElevatedButton(
-                        onPressed: () {}, child: const Text('Top Up')),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    TopupWidget()), // Navigasi ke halaman topup
+                          );
+                        },
+                        child: const Text('Top Up')),
                     const SizedBox(width: 4),
                     ElevatedButton(
                         onPressed: () {}, child: const Text('Lainnya')),
