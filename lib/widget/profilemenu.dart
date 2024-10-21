@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectmobile/Profile/PusatBantuan.dart';
 import '../presentation/LogReg/startpage.dart';
 
 class ProfileMenu {
@@ -33,8 +34,13 @@ class ProfileMenu {
                 title: const Text('Pusat Bantuan',
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
-                  // Aksi untuk Pusat Bantuan
-                  Navigator.pop(context);
+                  // Navigate to the Pusat Bantuan screen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PusatBantuanPage(),
+                    ),
+                  );
                 },
               ),
               ListTile(
