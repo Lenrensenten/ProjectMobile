@@ -18,7 +18,7 @@ class ReviewScreen extends StatelessWidget {
             Icon(
               Icons.rate_review,
               size: 100,
-              color: Colors.grey[400],
+              color: Colors.grey[300],
             ),
             const SizedBox(height: 16),
             const Text(

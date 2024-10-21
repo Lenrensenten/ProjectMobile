@@ -103,7 +103,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                             Text(
                               item['sold'],
                               style: const TextStyle(
-                                fontSize: 12,
+                                fontSize: 13,
                                 color: Colors.black,
                               ),
                             ),
