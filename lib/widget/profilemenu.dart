@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projectmobile/Profile/PusatBantuan.dart';
+import 'package:projectmobile/Profile/Settings.dart';
 import '../presentation/LogReg/startpage.dart';
 
 class ProfileMenu {
@@ -26,7 +27,10 @@ class ProfileMenu {
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   // Aksi untuk Settings
-                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                      builder: (context) => const SettingsScreen()));
                 },
               ),
               ListTile(

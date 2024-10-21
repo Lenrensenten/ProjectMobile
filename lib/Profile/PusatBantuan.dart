@@ -14,6 +14,20 @@ class PusatBantuanPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[800],
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF607D8B),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            // Navigasi kembali ke halaman sebelumnya
+            Navigator.pop(context);
+          },
+        ),
+        title: const Text(
+          'Pusat Bantuan',
+          style: TextStyle(color: Colors.white, fontSize: 18),
+        ),
+      ),
       body: Center(
         child: SizedBox(
           width: MediaQuery
@@ -26,20 +40,6 @@ class PusatBantuanPage extends StatelessWidget {
               .height,
           child: Column(
             children: [
-              Container(
-                color: const Color(0xFF607D8B),
-                padding: const EdgeInsets.all(16),
-                child: const Row(
-                  children: [
-                    Icon(Icons.arrow_back, color: Colors.white),
-                    SizedBox(width: 16),
-                    Text(
-                      'Pusat Bantuan',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    ),
-                  ],
-                ),
-              ),
               Container(
                 color: const Color(0xFF607D8B),
                 padding: const EdgeInsets.all(16),
@@ -104,17 +104,17 @@ class PusatBantuanPage extends StatelessWidget {
                         child: ListView(
                           children: [
                             Text(
-                              '[Pelacakan Pesanan] Bagaimana cara mengetahui estimasi waktu pengiriman pesanan?',
+                              '[Pesanan Dan Pengiriman] Bagaimana cara mengetahui estimasi waktu pengiriman pesanan?',
                               style: TextStyle(color: Colors.grey[700]),
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              '[Pelacakan Pesanan] Di mana saya melihat status pesanan saya?',
+                              '[Pesanan Dan Pengiriman] Di mana saya melihat status pesanan saya?',
                               style: TextStyle(color: Colors.grey[700]),
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              '[Pembatalan Pesanan] Apakah saya dapat membatalkan pesanan saya?',
+                              '[Pesanan Dan Pengiriman] Apakah saya dapat membatalkan pesanan saya?',
                               style: TextStyle(color: Colors.grey[700]),
                             ),
                             const SizedBox(height: 16),
