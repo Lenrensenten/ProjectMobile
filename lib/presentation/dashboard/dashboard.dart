@@ -8,7 +8,6 @@ import '../transaksi/traksaksi.dart';
 import '../cart/keranjang.dart';
 import '../../widget/profilemenu.dart';
 import '../../widget/showsearchhistory.dart';
-import '../../widget/kategori.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});

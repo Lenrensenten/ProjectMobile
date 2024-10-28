@@ -3,7 +3,8 @@ import 'package:projectmobile/Profile/PusatBantuan.dart';
 import 'package:projectmobile/Profile/Settings.dart';
 import 'package:projectmobile/Profile/Ulasan.dart';
 import 'package:projectmobile/Profile/WishList.dart';
-import '../presentation/LogReg/startpage.dart';
+import '../presentation/Logreg/startpage.dart';
+
 
 class ProfileMenu {
   static void showProfileMenu(BuildContext context) {
