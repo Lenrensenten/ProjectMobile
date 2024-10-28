@@ -1,6 +1,6 @@
-# projectmobile
+# myapp
 
-A new Mobile project.
+A new Flutter project.
 
 ## Getting Started
 

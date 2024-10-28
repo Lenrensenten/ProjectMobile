@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import '../presentation/LogReg/startpage.dart';
+import 'package:projectmobile/Profile/PusatBantuan.dart';
+import 'package:projectmobile/Profile/Settings.dart';
+import 'package:projectmobile/Profile/Ulasan.dart';
+import 'package:projectmobile/Profile/WishList.dart';
+import '../presentation/Logreg/startpage.dart';
 
 class ProfileMenu {
   static void showProfileMenu(BuildContext context) {
@@ -25,7 +29,10 @@ class ProfileMenu {
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   // Aksi untuk Settings
-                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                      builder: (context) => const SettingsScreen()));
                 },
               ),
               ListTile(
@@ -33,8 +40,13 @@ class ProfileMenu {
                 title: const Text('Pusat Bantuan',
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
-                  // Aksi untuk Pusat Bantuan
-                  Navigator.pop(context);
+                  // Navigate to the Pusat Bantuan screen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PusatBantuanPage(),
+                    ),
+                  );
                 },
               ),
               ListTile(
@@ -43,7 +55,12 @@ class ProfileMenu {
                     const Text('Ulasan', style: TextStyle(color: Colors.white)),
                 onTap: () {
                   // Aksi untuk Ulasan
-                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ReviewScreen(),
+                    ),
+                  );
                 },
               ),
               ListTile(
@@ -51,8 +68,12 @@ class ProfileMenu {
                 title: const Text('Wishlist',
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
-                  // Aksi untuk Wishlist
-                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const WishlistScreen(),
+                    ),
+                  );
                 },
               ),
               ListTile(
