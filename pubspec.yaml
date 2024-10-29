@@ -34,6 +34,9 @@ dependencies:
   firebase_core: ^3.6.0
   firebase_auth: ^5.3.1
   firebase_database: ^11.1.4
+  shared_preferences: ^2.2.0
+  cloud_firestore: ^5.4.4
+  get: ^4.6.6
 
 
 
@@ -64,19 +67,6 @@ flutter:
     - assets/promo_baju1.png
     - assets/promo_baju2.png
     - assets/racing_jersey.png
-    - assets/vector (4).svg
-    - assets/vector (5).svg
-    - assets/vector (6).svg
-    - assets/vector (7).svg
-    - assets/vector (8).svg
-    - assets/vector (9).svg
-    - assets/vector (25).svg
-    - assets/vector (26).svg
-    - assets/vector (31).svg
-    - assets/vector (32).svg
-    - assets/vector (33).svg
-    - assets/vector (34).svg
-
 
 
 
