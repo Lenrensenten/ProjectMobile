@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import '../controller/setting_controller.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -11,43 +10,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  String _selectedLanguage = 'Bahasa Indonesia';
-  String _userName = 'Loading...';
-  String _userBio = 'Loading...';
-  String? _userProfileImage;
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchUserData();
-  }
-
-  Future<void> _fetchUserData() async {
-    try {
-      final user = FirebaseAuth.instance.currentUser; // Mendapatkan UID pengguna yang sedang login
-      if(user != null){
-        final userData = await FirebaseFirestore.instance
-            .collection('users')
-            .doc(user.uid)
-            .get();
-        final data = userData.data();// Mengambil dokumen pengguna dari Firestore
-        if (data != null) {
-          _userName = data['name'] ?? 'Unknown User'; // Mengambil nama pengguna
-          _userBio = data['bio'] ?? 'No bio available'; // Mengambil bio pengguna
-          _userProfileImage = data['profileImageUrl']; // Mengambil URL gambar profil
-
-        } else {
-          print('User document does not exist.');
-        }
-      }
-    } catch (e) {
-      print('Error fetching user data: $e'); // Menampilkan pesan kesalahan jika gagal
-      setState(() {
-        _userName = 'Failed to load user'; // Menampilkan pesan kesalahan di UI
-        _userBio = 'Please try again later'; // Menampilkan pesan kesalahan di UI
-      });
-    }
-  }
+  final SettingsController controller = Get.put(SettingsController());
 
   @override
   Widget build(BuildContext context) {
@@ -90,24 +53,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       body: ListView(
         children: [
-          ListTile(
+          Obx (() => ListTile(
             leading: GestureDetector(
               onTap: () {},
               child: CircleAvatar(
                 radius: 30,
-                backgroundImage: _userProfileImage != null ? NetworkImage(_userProfileImage!) : null,
-                child: _userProfileImage == null ? const Icon(Icons.person) : null, // Icon jika tidak ada gambar profil
+                backgroundImage: controller.userProfileImage.value.isNotEmpty
+                    ? NetworkImage(controller.userProfileImage.value)
+                    : null,
+                child: controller.userProfileImage.value.isEmpty
+                    ? const Icon(Icons.person)
+                    : null,
               ),
             ),
-            title: Text(_userName), // Menampilkan nama pengguna
-            subtitle: Text(_userBio), // Menampilkan bio pengguna
+            title: Text(controller.userName.value),
+            subtitle: Text(controller.userBio.value),
             trailing: GestureDetector(
               child: const Icon(Icons.edit),
               onTap: () {
                 Get.toNamed('/editprofile');
               },
             ),
-          ),
+          )),
           const Padding(
             padding: EdgeInsets.all(16.0),
             child: Text('Akun Saya', style: TextStyle(color: Colors.grey)),
@@ -143,9 +110,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           ListTile(
             title: const Text('Bahasa / Language'),
-            subtitle: Text(_selectedLanguage, style: const TextStyle(color: Colors.grey)),
+            subtitle: const Text('Bahasa Indonesia', style: TextStyle(color: Colors.grey)),
             trailing: DropdownButton(
-              value: _selectedLanguage,
+              value: 'Bahasa Indonesia',
               items: const [
                 DropdownMenuItem(
                   value: 'Bahasa Indonesia',
@@ -156,11 +123,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: Text('English'),
                 ),
               ],
-              onChanged: (value) {
-                setState(() {
-                  _selectedLanguage = value as String;
-                });
-              },
+              onChanged: (value) {},
             ),
           ),
         ],

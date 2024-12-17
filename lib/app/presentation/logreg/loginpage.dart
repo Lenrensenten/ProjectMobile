@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:projectmobile/app/presentation/Logreg/lupapassword.dart';
-
 import '../../controller/auth_controller.dart';
 
 class LoginPage extends StatefulWidget {
@@ -138,12 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                           alignment: Alignment.centerRight,
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const LupaPasswordPage()),
-                              );
+                              Get.offAllNamed('/lupapassword');
                             },
                             child: const Text(
                               'Lupa Password?',

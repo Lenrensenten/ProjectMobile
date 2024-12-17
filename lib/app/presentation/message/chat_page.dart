@@ -49,10 +49,22 @@ class _ChatPageState extends State<ChatPage>
     return Scaffold(
       backgroundColor: const Color(0xFF121B22), // WhatsApp dark theme background
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1F2C34), // WhatsApp dark theme header
         elevation: 0,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFF191E20), // Warna atas header
+                Color(0xFF677D86), // Warna bawah header
+              ],
+              stops: [0.0, 0.6],
+            ),
+          ),
+        ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.grey),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
         title: Row(
@@ -81,7 +93,7 @@ class _ChatPageState extends State<ChatPage>
                     'Online',
                     style: TextStyle(
                       fontSize: 12,
-                      color: Colors.grey,
+                      color: Colors.white70,
                     ),
                   ),
                 ],
@@ -91,36 +103,30 @@ class _ChatPageState extends State<ChatPage>
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.videocam, color: Colors.grey),
-            onPressed: ()
-            {
-              //ini untukVideoCall
+            icon: const Icon(Icons.videocam, color: Colors.white),
+            onPressed: () {
+              // Untuk VideoCall
             },
           ),
           IconButton(
-            icon: const Icon(Icons.call, color: Colors.grey),
-            onPressed: ()
-            {
-              //ini untuk telpon biasa
+            icon: const Icon(Icons.call, color: Colors.white),
+            onPressed: () {
+              // Untuk telpon
             },
           ),
           IconButton(
-            icon: const Icon(Icons.more_vert, color: Colors.grey),
-            onPressed: ()
-            {
-              //ini untuk fitur tambahan
+            icon: const Icon(Icons.more_vert, color: Colors.white),
+            onPressed: () {
+              // Untuk fitur tambahan
             },
           ),
         ],
       ),
+
+
       body: Container(
         decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(
-                'https://i.pinimg.com/originals/97/c0/07/97c00759d90d786d9b6096d274ad3e07.png'),
-            fit: BoxFit.cover,
-            opacity: 0.1, // Makes the background subtle
-          ),
+          color: Colors.white
         ),
         child: Column(
           children: [
@@ -181,8 +187,8 @@ class _ChatPageState extends State<ChatPage>
           ),
           decoration: BoxDecoration(
             color: isCurrentUser
-                ? const Color(0xFF005C4B) // WhatsApp sent message color
-                : const Color(0xFF1F2C34), // WhatsApp received message color
+                ? const Color(0xFF677D86) // WhatsApp sent message color
+                : const Color(0xFF52646B), // WhatsApp received message color
             borderRadius: BorderRadius.only(
               topLeft: const Radius.circular(16),
               topRight: const Radius.circular(16),
@@ -219,12 +225,14 @@ class _ChatPageState extends State<ChatPage>
   Widget _buildMessageInput() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-      color: const Color(0xFF1F2C34), // WhatsApp dark theme input background
+      color: const Color(0xFF677D86),
       child: Row(
         children: [
           IconButton(
-            icon: const Icon(Icons.emoji_emotions_outlined, color: Colors.grey),
-            onPressed: () {},
+            icon: const Icon(Icons.emoji_emotions_outlined, color: Colors.black54),
+            onPressed: () {
+
+            },
           ),
           Expanded(
             child: TextField(
@@ -232,9 +240,9 @@ class _ChatPageState extends State<ChatPage>
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: 'Message',
-                hintStyle: const TextStyle(color: Colors.grey),
+                hintStyle: const TextStyle(color: Colors.black38),
                 filled: true,
-                fillColor: const Color(0xFF2A3942),
+                fillColor: Colors.white,
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 16,
                   vertical: 8,
@@ -262,8 +270,11 @@ class _ChatPageState extends State<ChatPage>
           const SizedBox(width: 8),
           Container(
             decoration: const BoxDecoration(
-              color: Color(0xFF00A884), // WhatsApp green
-              shape: BoxShape.circle,
+              color: Color(0xFF293235), // WhatsApp green
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
             ),
             child: IconButton(
               icon: const Icon(

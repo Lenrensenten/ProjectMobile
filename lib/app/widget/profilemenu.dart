@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:projectmobile/app/Profile/pusat_bantuan.dart';
-import 'package:projectmobile/app/Profile/settings.dart';
+import 'package:get/get.dart';
 import 'package:projectmobile/app/Profile/ulasan.dart';
 import 'package:projectmobile/app/Profile/wishlist.dart';
 import '../presentation/Logreg/startpage.dart';
+
 
 
 class ProfileMenu {
@@ -30,10 +30,7 @@ class ProfileMenu {
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
                   // Aksi untuk Settings
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                      builder: (context) => const SettingsScreen()));
+                  Get.toNamed('/setting');
                 },
               ),
               ListTile(
@@ -41,13 +38,8 @@ class ProfileMenu {
                 title: const Text('Pusat Bantuan',
                     style: TextStyle(color: Colors.white)),
                 onTap: () {
-                  // Navigate to the Pusat Bantuan screen
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PusatBantuanPage(),
-                    ),
-                  );
+                  Get.toNamed('/pusatbantuan');
+
                 },
               ),
               ListTile(

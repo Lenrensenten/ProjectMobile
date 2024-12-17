@@ -112,13 +112,14 @@ class _Messages extends State<Message> {
       stream: FirebaseFirestore.instance.collection('users').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return const Text('error');
+          return const Center(child: Text('Terjadi kesalahan'));
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Text('loading...');
+          return const Center(child: CircularProgressIndicator());
         }
 
         return ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           children: snapshot.data!.docs
               .map<Widget>((doc) => _buildUserListItem(doc))
               .toList(),
@@ -126,24 +127,82 @@ class _Messages extends State<Message> {
       },
     );
   }
+
   Widget _buildUserListItem(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
 
     if (_firebaseAuth.currentUser!.email != data['email']) {
-      return ListTile(
-          title: Text(data['email']),
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChatPage(
-                      receiverUserEmail: data['email'],
-                      receiverUserID: data['uid'],
-                    )));
-          });
+      return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChatPage(
+                receiverUserEmail: data['email'],
+                receiverUserID: data['uid'],
+              ),
+            ),
+          );
+        },
+        child: Card(
+          elevation: 3,
+          margin: const EdgeInsets.symmetric(vertical: 8.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Row(
+              children: [
+                // User Avatar
+                CircleAvatar(
+                  radius: 25,
+                  backgroundImage: data['photoUrl'] != null && data['photoUrl'] != ''
+                      ? NetworkImage(data['photoUrl'])
+                      : const AssetImage('assets/default_avatar.png')
+                  as ImageProvider,
+                  backgroundColor: Colors.grey[300],
+                ),
+                const SizedBox(width: 16),
+
+                // User Details
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // User Name
+                      Text(
+                        data['name'] ?? 'Pengguna',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+
+                      // User Email
+                      Text(
+                        data['email'],
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Indicator (e.g., Online Status)
+                const Icon(Icons.circle, color: Colors.green, size: 14), // Online Indicator
+              ],
+            ),
+          ),
+        ),
+      );
     } else {
       return Container();
     }
   }
+
 
 }

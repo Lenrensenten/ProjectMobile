@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -105,7 +106,7 @@ class _EditProfileState extends State<EditProfile> {
                           left: 16.0, top: 16.0, bottom: 16.0, right: 4.0),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pop(context);
+                          Get.offAllNamed('/setting');
                         },
                         child: const Icon(
                           Icons.arrow_back,

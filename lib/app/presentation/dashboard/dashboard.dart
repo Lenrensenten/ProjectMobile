@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:projectmobile/app/presentation/item/detailproduk.dart';
 import 'package:projectmobile/app/widget/kategori.dart';
 import '../message/chat_screen.dart';
 import '../notification/notifikasi.dart';
@@ -7,6 +6,8 @@ import '../transaksi/traksaksi.dart';
 import '../cart/keranjang.dart';
 import '../../widget/profilemenu.dart';
 import '../../widget/showsearchhistory.dart';
+import 'package:projectmobile/app/model/product_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class Dashboard extends StatefulWidget {
@@ -24,6 +25,9 @@ class _Dashboard extends State<Dashboard> {
     "Sepatu sneaker",
     "Topi stylish"
   ]; // Daftar search history
+
+  final CollectionReference productsRef =
+  FirebaseFirestore.instance.collection('products');
 
   @override
   Widget build(BuildContext context) {
@@ -114,8 +118,9 @@ class _Dashboard extends State<Dashboard> {
             ),
           ),
 
+
           const SizedBox(height: 16),
-          // Wallet Balance (Poin Section)
+
           Container(
             padding:
                 const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
@@ -133,9 +138,9 @@ class _Dashboard extends State<Dashboard> {
                     Icon(Icons.wallet_travel, color: Colors.white, size: 24),
                     SizedBox(width: 8),
                     Text(
-                      '0 Poin',
+                      '0 Rupiah',
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
                     ),
                   ],
                 ),
@@ -267,50 +272,90 @@ class _Dashboard extends State<Dashboard> {
             ),
           ),
           const SizedBox(height: 16.0),
-          // Featured Products
+
+
           Expanded(
-            child: Padding(
-              padding:
-                  const EdgeInsets.only(bottom: 16.0, left: 16.0, right: 16.0),
-              child: ListView(
-                children: [
-                  // Produk Promo 1
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 180,
-                        child: Column(
-                          children: [
-                            IconButton(onPressed: (){}, icon: Image.asset('assets/promo_baju1.png', height: 170),),
-                            const SizedBox(height: 8),
-                            const Text('Promo Baju Kekinian!!'),
-                          ],
+            child: StreamBuilder<QuerySnapshot>(
+              stream: productsRef.snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (snapshot.hasError) {
+                  return const Center(child: Text('Error loading products'));
+                }
+
+                final products = snapshot.data!.docs
+                    .map((doc) =>
+                    Product.fromFirestore(doc.data() as Map<String, dynamic>, doc.id))
+                    .toList();
+
+                return GridView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,  // Jumlah kolom yang diinginkan
+                    mainAxisSpacing: 8.0,
+                    crossAxisSpacing: 8.0,
+                    childAspectRatio: 0.75,  // Rasio aspek untuk ukuran item
+                  ),
+                  itemCount: products.length,
+                  itemBuilder: (context, index) {
+                    final product = products[index];
+                    return GestureDetector(
+                      onTap: () {
+                        Get.toNamed('/detail', arguments: product);
+                      },
+                      child: Card(
+                        elevation: 4.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.0),
                         ),
-                      ),
-                      SizedBox(
-                        width: 180,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            IconButton(onPressed: (){}, icon: Image.asset('assets/promo_baju2.png', height: 170),),
-                            const SizedBox(height: 8),
-                            const Text(
-                              'Baju yang awet sampai ke Masa tua',
-                              textAlign: TextAlign.center,
+                            Expanded(
+                              child: ClipRRect(
+                                borderRadius: const BorderRadius.vertical(
+                                  top: Radius.circular(12.0),
+                                ),
+                                child: Image.network(
+                                  product.imageUrl,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                product.name,
+                                style: const TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text(
+                                'Rp ${product.price}',
+                                style: const TextStyle(
+                                  fontSize: 14.0,
+                                  color: Colors.grey,
+                                ),
+                              ),
                             ),
                           ],
                         ),
                       ),
-
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  // Tambahan produk jika ada
-                ],
-              ),
+                    );
+                  },
+                );
+              },
             ),
           ),
+
+
           // Footer
           Container(
             height: 80,
